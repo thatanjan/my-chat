@@ -1,3 +1,5 @@
+'use client'
+
 import { useState } from 'react'
 import ChatList from './chat-list'
 import ChatWindow from './chat-window'
@@ -12,4 +14,3 @@ export default function ChatLayout() {
     </>
   )
 }
-
