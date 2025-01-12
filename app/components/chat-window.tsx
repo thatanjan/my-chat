@@ -6,6 +6,7 @@ import { useState, useEffect, useRef } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Send } from 'lucide-react'
+import { logout } from '@/actions/login'
 
 interface ChatWindowProps {
   selectedChatId: number | null
@@ -14,6 +15,14 @@ interface ChatWindowProps {
 interface MessageInputProps {
   onSendMessage: (content: string) => void
 }
+
+const LogoutButton = () => (
+  <form action={logout}>
+    <Button className='ml-4 bg-white text-gray-900 hover:bg-gray-100'>
+      Logout
+    </Button>
+  </form>
+)
 
 const chats = [
   {
@@ -178,8 +187,10 @@ export default function ChatWindow({ selectedChatId }: ChatWindowProps) {
 
     return (
       <div className='flex-grow flex flex-col'>
-        <div className='p-4 border-b border-gray-700'>
+        <div className='p-4 border-b border-gray-700 flex items-center justify-center'>
           <h2 className='text-xl font-semibold'>{selectedChat?.name}</h2>
+
+          <LogoutButton />
         </div>
         <ScrollArea className='flex-grow p-4 scroll-area' ref={scrollAreaRef}>
           {filteredMessages.map(message => (
@@ -224,8 +235,10 @@ export default function ChatWindow({ selectedChatId }: ChatWindowProps) {
 
   return (
     <div className='flex-grow flex flex-col'>
-      <div className='p-4 border-b border-gray-700'>
+      <div className='p-4 border-b border-gray-700 flex items-center justify-between'>
         <h2 className='text-xl font-semibold'>All Conversations</h2>
+
+        <LogoutButton />
       </div>
       <ScrollArea className='flex-grow p-4'>
         {chats.map(chat => (
